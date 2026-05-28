@@ -52,7 +52,7 @@ class KMeansAlgorithm(PixelationAlgorithm):
         return quantized.resize(image.size, Image.NEAREST)
 
     def _kmeans_quantize(self, image: Image.Image, k: int) -> Image.Image:
-        pixels = list(image.get_flattened_data())
+        pixels = list(image.getdata())
         if image.mode == 'RGBA':
             rgb_pixels = [p[:3] for p in pixels]
             alpha = [p[3] for p in pixels]
