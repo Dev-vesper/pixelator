@@ -1,7 +1,7 @@
 from abc import ABC, abstractmethod
 from typing import List, Tuple, Optional
 from PIL import Image
-from .utils import apply_palette
+from .utils import apply_palette, get_pixels
 import random
 
 
@@ -52,7 +52,7 @@ class KMeansAlgorithm(PixelationAlgorithm):
         return quantized.resize(image.size, Image.NEAREST)
 
     def _kmeans_quantize(self, image: Image.Image, k: int) -> Image.Image:
-        pixels = list(image.getdata())
+        pixels = get_pixels(image)
         if image.mode == 'RGBA':
             rgb_pixels = [p[:3] for p in pixels]
             alpha = [p[3] for p in pixels]

@@ -64,3 +64,11 @@ def pixelate_alpha_channel(alpha: Image.Image, pixel_size: int) -> Image.Image:
         Image.NEAREST
     )
     return small.resize(alpha.size, Image.NEAREST)
+
+
+def get_pixels(image: Image.Image) -> list:
+    """Return a flat list of all pixel values, backward-compatible with old Pillow."""
+    if hasattr(image, 'get_flattened_data'):
+        return list(image.get_flattened_data())
+    else:
+        return list(image.getdata())
